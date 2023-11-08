@@ -44,11 +44,11 @@ async def root(item: LicenseItem):
         return "false,not registered email,,"
 
     idx = license.index[license['Payment Email'] == item.mail].tolist()[0]
-    date = license['Date of Expiry'].loc[idx]
+    # date = license['Date of Expiry'].loc[idx]
     acc_num = license['Allowed Accounts'].loc[idx]
 
-    if datetime.now().strftime("%Y.%m.%d") > date:
-        return "false,license expired at %s,," % date
+    # if datetime.now().strftime("%Y.%m.%d") > date:
+    #     return "false,license expired at %s,," % date
 
     if item.mail not in accounts:
         accounts[item.mail] = []
@@ -62,4 +62,5 @@ async def root(item: LicenseItem):
         except:
             pass
     
-    return "ok,%s,%s,%s" % (date, len(accounts[item.mail]), acc_num)
+    # return "ok,%s,%s,%s" % (date, len(accounts[item.mail]), acc_num)
+    return "ok,,%s,%s" % (len(accounts[item.mail]), acc_num)
